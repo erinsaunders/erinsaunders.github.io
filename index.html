@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Erin Saunders | AI-Enhanced HR</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-bg: #FDFBF7;
+    --color-bg-warm: #F5F0E8;
+    --color-text: #2D2A26;
+    --color-text-secondary: #6B6560;
+    --color-accent: #1B4D5C;
+    --color-accent-light: #E8F0F2;
+    --color-accent-warm: #C4804E;
+    --color-border: #E0D8CC;
+    --color-card-bg: #FFFFFF;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Source Sans 3', 'Segoe UI', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.7;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(253, 251, 247, 0.92);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+    border-bottom: 1px solid var(--color-border);
+  }
+  nav .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav .nav-name {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--color-accent);
+  }
+  nav .nav-links a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    margin-left: 28px;
+    transition: color 0.2s;
+  }
+  nav .nav-links a:hover { color: var(--color-accent); }
+
+  /* HERO */
+  .hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 140px 32px 80px;
+  }
+  .hero-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent-warm);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.2;
+    color: var(--color-text);
+    max-width: 800px;
+    margin-bottom: 28px;
+  }
+  .hero h1 .accent { color: var(--color-accent); }
+  .hero-sub {
+    font-size: 19px;
+    color: var(--color-text-secondary);
+    max-width: 640px;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  /* DIVIDER */
+  .divider {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .divider hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* ABOUT */
+  .about {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 32px;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .about-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent-warm);
+    padding-top: 4px;
+  }
+  .about-content {
+    max-width: 640px;
+  }
+  .about-content p {
+    margin-bottom: 16px;
+    color: var(--color-text-secondary);
+  }
+  .about-content p:last-child { margin-bottom: 0; }
+  .about-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  /* PUBLISHED WORK */
+  .published {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 32px;
+  }
+  .published-list {
+    margin-top: 20px;
+  }
+  .pub-item {
+    font-size: 16px;
+    color: var(--color-text);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-border);
+    font-weight: 400;
+  }
+  .pub-item:first-child {
+    border-top: 1px solid var(--color-border);
+  }
+  .about-tag {
+    background: var(--color-accent-light);
+    color: var(--color-accent);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
+
+  /* PROJECTS */
+  .projects {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 32px;
+  }
+  .projects-header {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    margin-bottom: 40px;
+  }
+  .projects-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent-warm);
+    padding-top: 4px;
+  }
+  .projects-intro {
+    color: var(--color-text-secondary);
+    max-width: 640px;
+  }
+
+  .project-card {
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.15s ease;
+    cursor: pointer;
+  }
+  .project-card:hover {
+    box-shadow: 0 8px 32px rgba(45, 42, 38, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .project-card-header {
+    padding: 32px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .project-card-header h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--color-text);
+    margin-bottom: 8px;
+  }
+  .project-card-header .project-summary {
+    color: var(--color-text-secondary);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .project-tag {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 12px;
+    background: var(--color-bg-warm);
+    color: var(--color-text-secondary);
+  }
+  .expand-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-bg-warm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent);
+    font-size: 18px;
+    transition: background 0.2s, transform 0.3s;
+  }
+  .project-card.open .expand-icon {
+    transform: rotate(45deg);
+  }
+
+  .project-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
+  .project-detail-inner {
+    padding: 0 36px 36px;
+    border-top: 1px solid var(--color-border);
+  }
+  .project-question {
+    margin-top: 28px;
+  }
+  .project-question:first-child { margin-top: 28px; }
+  .project-question h4 {
+    font-family: var(--font-display);
+    font-size: 17px;
+    color: var(--color-accent);
+    margin-bottom: 10px;
+  }
+  .project-question p {
+    color: var(--color-text-secondary);
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+  .project-question p:last-child { margin-bottom: 0; }
+
+  /* PHILOSOPHY */
+  .philosophy {
+    background: var(--color-accent);
+    color: white;
+    margin: 64px 0 0;
+    padding: 80px 32px;
+  }
+  .philosophy-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+  }
+  .philosophy-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent-warm);
+    padding-top: 4px;
+  }
+  .philosophy-content {
+    max-width: 640px;
+  }
+  .philosophy-content h2 {
+    font-family: var(--font-display);
+    font-size: 32px;
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+  .philosophy-content p {
+    color: rgba(255,255,255,0.82);
+    margin-bottom: 16px;
+    line-height: 1.8;
+  }
+
+  /* CONTACT */
+  .contact {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 32px;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+  }
+  .contact-content a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 8px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .contact-content a:hover {
+    border-bottom-color: var(--color-accent);
+  }
+  .contact-content .contact-note {
+    color: var(--color-text-secondary);
+    font-size: 15px;
+    margin-top: 12px;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 32px;
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .about-grid, .projects-header, .philosophy-inner, .contact-grid, .published .about-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .project-card-header { padding: 24px; }
+    .project-detail-inner { padding: 0 24px 24px; }
+    .hero { padding: 120px 24px 60px; }
+    .about, .projects, .contact { padding: 48px 24px; }
+    .philosophy { padding: 60px 24px; }
+    nav .nav-links a { margin-left: 16px; font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-name">Erin Saunders</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Work</a>
+      <a href="#published">Writing</a>
+      <a href="#philosophy">Approach</a>
+      <a href="#contact">Connect</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-label">HR Business Partner · AI Practitioner</div>
+  <h1>15 years in HR. Three years using AI. I got into this work because when HR is done well, <span class="accent">people thrive and businesses grow.</span> AI helps me do it better.</h1>
+  <p class="hero-sub">I use AI to amplify my expertise, not replace my judgment. These are real projects from my work as an HRBP. Each one shows where AI helped, where I had to push back on it, and what I learned in the process.</p>
+</section>
+
+<div class="divider"><hr></div>
+
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-label">About</div>
+    <div class="about-content">
+      <p>I'm an HR Business Partner with about 15 years of experience, most of it embedded in sales organizations. I've worked across industries from geospatial tech to commercial real estate to nonprofits, and the through-line is always the same: learn how the business works, earn trust with leaders, and use that relationship to build HR strategies that actually move things forward.</p>
+      <p>I've been using AI in my HR work daily since 2022. It makes me faster and it makes my output stronger, but only because I know what good looks like. AI can produce content fast. Knowing whether that content is right takes someone who understands the people, the politics, and the stakes.</p>
+      <p>Master's degree in Nonprofit Management. Brain-based performance management advocate. I stay close to how the models and best practices are evolving because this is a skill that keeps changing, and I want to keep getting better at it.</p>
+      <div class="about-details">
+        <span class="about-tag">M.N.M., Nonprofit Management</span>
+        <span class="about-tag">Sales Org HRBP</span>
+        <span class="about-tag">Change Management</span>
+        <span class="about-tag">Performance Management</span>
+        <span class="about-tag">Org Design</span>
+        <span class="about-tag">AI Practitioner Since 2022</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<section class="projects" id="projects">
+  <div class="projects-header">
+    <div class="projects-label">The Work</div>
+    <p class="projects-intro">Each project follows a simple framework: what I built, why I approached it this way, what was at stake, and what I learned. Click any card to read the full story.</p>
+  </div>
+
+  <!-- PROJECT 1 -->
+  <div class="project-card" onclick="toggleProject(this)">
+    <div class="project-card-header">
+      <div>
+        <h3>Career Path Framework for a Global Sales Organization</h3>
+        <p class="project-summary">Facilitated a cross-functional leadership workshop to build a competency-based career path for sales ICs. AI helped me prepare, pivot my approach, capture outcomes in real time, and build out the framework and project communications post-session.</p>
+        <div class="project-tags">
+          <span class="project-tag">Facilitation Design</span>
+          <span class="project-tag">Org Development</span>
+          <span class="project-tag">Claude + Claude for Excel + Claude for PowerPoint</span>
+        </div>
+      </div>
+      <div class="expand-icon">+</div>
+    </div>
+    <div class="project-detail">
+      <div class="project-detail-inner">
+        <div class="project-question">
+          <h4>What is this?</h4>
+          <p>A career path framework for individual contributors in a global sales organization. The org had no structured way for ICs to see how growing their skills and autonomy connected to career progression. Two senior sales leaders had already started building their own models independently, which told me there was demand but also meant competing visions. I was brought in to facilitate a workshop that would align leadership on a single framework we could eventually scale globally.</p>
+        </div>
+        <div class="project-question">
+          <h4>Why this approach, and where did AI fit?</h4>
+          <p>I used Claude throughout, but how I used it changed significantly as the project evolved.</p>
+          <p>My first move was to feed Claude both leaders' existing models and ask it to synthesize them into one framework. What I got back was polished, comprehensive, and ready to present. That was the problem. A finished framework would have eaten the entire workshop. Leaders who hadn't contributed yet would have nothing to push against. The ones who had would spend the session editing instead of thinking. I would have bypassed the collaboration the session needed to succeed.</p>
+          <p>So I went back to Claude and reframed the ask. Not "build the framework" but "help me facilitate a session where the leaders build it together." Claude already had context on the individual leaders' tendencies and working styles, so it helped me design an agenda with specific facilitation moves: where to create productive tension between the two existing models, where to leave white space for leaders who were encountering the problem for the first time, and how to sequence the conversation so the group arrived at alignment rather than having it handed to them. I edited the agenda to be less formal (better fit for our culture) and then synced with my HR counterpart to align on the approach.</p>
+          <p>During the live workshop, AI stayed in the workflow. As leaders worked through competency dimensions on sticky notes, I photographed the boards and uploaded the images directly into Claude to transcribe and organize the content in real time. Then I opened the Claude for Excel add-in with an existing marketing career path as a template and had Claude build out the sales career path structure using the competency dimensions the group had just identified. What would have taken me at least an hour pre-AI took about five minutes. The leaders walked out of that session with something tangible already taking shape, not a promise that I'd send something next week.</p>
+          <p>After the workshop, AI stayed central to the project. I uploaded the sticky note photos along with the two draft frameworks that the sales leaders had originally created and used the Claude for Excel add-in to build a consolidated career framework that incorporated all three inputs. What would have taken me a week took about two hours. From there, I used Claude to generate the prompt I needed for Claude for PowerPoint to draft a presentation updating the broader project team on the goal, what had already been accomplished, and what we needed from them next. Claude also built the feedback form questions we'd use to solicit input from the wider sales organization. I iterated on each of these with Claude, making sure we were thinking through SCARF risks and designing brain-friendly feedback mechanisms throughout.</p>
+        </div>
+        <div class="project-question">
+          <h4>What would break?</h4>
+          <p>The stakes were real. The company was flying the team to headquarters for this workshop, so if the facilitation fell flat, that's a visible waste of investment. The output of this session would become the foundation for a global framework that directly impacts salesforce engagement and retention. And my credibility as a strategic HR partner was on the line. Walking in with something that felt AI-generated or imposed rather than co-created would have undermined trust with senior leadership.</p>
+        </div>
+        <div class="project-question">
+          <h4>What did I learn?</h4>
+          <p>Iteration isn't optional. AI's first output is a starting point, not a destination. And sometimes the hardest call is rejecting something that looks great because it's not what the moment needs. "Too finished" is a real failure mode when the goal is to get people in a room thinking together. AI is excellent at production, but production isn't always the point. The best output on this project came from being clear about who brings what: I'm the subject matter expert on these leaders, this culture, and this organization. Claude brings facilitation techniques, synthesis, and pattern recognition. We each played to our strengths.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECT 2 -->
+  <div class="project-card" onclick="toggleProject(this)">
+    <div class="project-card-header">
+      <div>
+        <h3>60-Role Sales Reorganization</h3>
+        <p class="project-summary">Owned the communication and change management strategy for a major sales reorg, using AI to produce documentation at speed so I could focus on the people side.</p>
+        <div class="project-tags">
+          <span class="project-tag">Change Management</span>
+          <span class="project-tag">SCARF Model</span>
+          <span class="project-tag">Communications</span>
+        </div>
+      </div>
+      <div class="expand-icon">+</div>
+    </div>
+    <div class="project-detail">
+      <div class="project-detail-inner">
+        <div class="project-question">
+          <h4>What is this?</h4>
+          <p>A major reorganization of a sales organization, moving roughly 60 salespeople from vertical-focused roles into channel sales support. I was relatively new to the organization, so I didn't have deep institutional knowledge, but I had solid experience with org design and change management. My role was to build the communication infrastructure around the change: communication plans, manager talking points, employee FAQs, and post-change debrief documents. The goal was to coordinate managers who were used to operating independently so messaging was consistent, to reduce uncertainty for the salesforce, and to create enough psychological safety that people felt comfortable surfacing risks.</p>
+        </div>
+        <div class="project-question">
+          <h4>Why this approach, and where did AI fit?</h4>
+          <p>Speed was the driver. The organization needed to move quickly, and I had drafted enough of these documents over the years to know exactly what good looked like. Content generation is one of AI's strengths, and I knew I could use Claude to produce drafts much faster than I could write them from scratch. That freed me up to spend my time where it mattered most: working directly with managers and employees on the human side of the change rather than sitting at my desk writing FAQs.</p>
+          <p>I gave Claude extensive context about the organization, the change, and the stakeholders. I asked it to interview me where it needed more clarity to produce better output. I incorporated elements from David Rock's SCARF model (status, certainty, autonomy, relatedness, fairness) to make sure the communications were addressing the psychological dimensions of the change, not just the logistical ones. Where language needed to be diplomatic, particularly in the debrief documents, I iterated with Claude on tone and framing until it landed right.</p>
+        </div>
+        <div class="project-question">
+          <h4>What would break?</h4>
+          <p>A lot. Salespeople who feel uncertain about their roles stop selling, which directly impacts revenue targets. If people didn't understand what was changing, what their options were, or what their new role looked like, turnover was a real possibility. Leadership would lose credibility if the communication felt uncoordinated or reactive. And my own professional brand was on the line as the person accountable for the change management strategy.</p>
+        </div>
+        <div class="project-question">
+          <h4>What did I learn?</h4>
+          <p>Even with AI support, strong communication plans, and well-crafted content, a reorganization is still going to be disruptive if the organization isn't ready to answer the hard questions. In this case, changes to compensation weren't ready to communicate alongside the role changes. I flagged this ahead of time, but leadership overestimated people's tolerance for uncertainty on comp while everything else was shifting. No amount of excellent content can substitute for organizational readiness. AI helped me move faster and produce stronger materials, but the judgment call about what to communicate and when still has to come from the HR partner who knows the people and the politics.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECT 3 -->
+  <div class="project-card" onclick="toggleProject(this)">
+    <div class="project-card-header">
+      <div>
+        <h3>AI-Assisted Performance Management Documentation</h3>
+        <p class="project-summary">Built a workflow using AI to move from scattered manager feedback to structured, legally defensible HR documentation while keeping sensitive employee data out of the tool.</p>
+        <div class="project-tags">
+          <span class="project-tag">Employee Relations</span>
+          <span class="project-tag">Legal Risk</span>
+          <span class="project-tag">Data Privacy</span>
+        </div>
+      </div>
+      <div class="expand-icon">+</div>
+    </div>
+    <div class="project-detail">
+      <div class="project-detail-inner">
+        <div class="project-question">
+          <h4>What is this?</h4>
+          <p>A performance management workflow using AI to move from raw manager feedback to formal documentation: written warnings, PIPs, executive summaries, and termination support. In a typical scenario, a manager comes to me with months of coaching notes and feedback captured in OneNote and needs help translating that into structured, defensible HR documentation. My role is to make sure the documentation is accurate, legally sound, appropriately toned, and tells a clear story from initial feedback through final action.</p>
+        </div>
+        <div class="project-question">
+          <h4>Why this approach, and where did AI fit?</h4>
+          <p>Performance management documentation follows a predictable arc: a manager has been coaching an employee, the feedback isn't landing, and at some point we need to move from informal conversations to formal documentation. The challenge is that by the time a manager comes to me, the feedback is usually scattered across months of notes, one-on-ones, and emails. Pulling that into a structured, defensible narrative takes real time.</p>
+          <p>I use Claude to do the heavy lifting on that synthesis. I feed in the manager's notes and have Claude organize them by date, event, business impact, and expected behavior change. That gives me a clean foundation to draft from. In cases where there are complicating factors, like timing that could raise questions about retaliation or overlapping employee complaints, I give Claude that context and have it flag potential risks and check against relevant employment law. The output gives me a strong starting point, but I always refine it. Claude's first pass is usually accurate on the facts, but the tone needs work. I try to walk the line between professional and empathetic in HR documentation, and that balance takes human judgment. I also tailor communications differently depending on the audience: the document itself, a summary for senior leadership, and talking points for the manager are all different deliverables with different framing.</p>
+          <p>When the situation continues over months, AI really proves its value. I can feed in new developments and have Claude build a complete timeline from initial feedback through formal documentation through current performance. That kind of comprehensive, well-organized record is what makes the difference between a defensible outcome and a risky one.</p>
+          <p>One thing I'm deliberate about: I do not feed employee-identifying information into AI. I anonymize before I start, using first names only, made-up names, or general descriptions. The content and patterns matter for generating good documentation. The personally identifiable details don't, and they shouldn't be in an AI tool.</p>
+        </div>
+        <div class="project-question">
+          <h4>What would break?</h4>
+          <p>The stakes here are high. If performance management documentation is handled incorrectly, the organization is exposed to legal action from current or former employees. When there are complicating factors like overlapping complaints or sensitive timing, getting the documentation wrong doesn't just look bad, it creates real liability. Beyond legal risk, there's organizational trust. Managers need to believe that HR will move quickly, give them sound guidance, and produce documentation they can stand behind. If I hand a manager something that reads like it was generated and not reviewed, I lose that trust. And there's always my own professional credibility. I view managers as my customers. Being responsive, moving quickly, and exercising sound judgment is how I earn and keep their confidence.</p>
+        </div>
+        <div class="project-question">
+          <h4>What did I learn?</h4>
+          <p>AI is genuinely powerful for this kind of work. Summarizing months of scattered feedback into a structured timeline, checking against legal frameworks, drafting documentation at speed. These things used to take me hours and now take a fraction of that. But efficiency without judgment is dangerous in HR. A PIP or written warning that gets generated and sent without careful review could miss the tone, miss legal nuance, or miss the context that makes a document defensible. I've learned to lean into AI where it makes sense and be thoughtful about where I draw the line. It handles the production. I bring the expertise, the sensitivity, and the accountability.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECT 4 -->
+  <div class="project-card" onclick="toggleProject(this)">
+    <div class="project-card-header">
+      <div>
+        <h3>Building This Portfolio (Yes, Really)</h3>
+        <p class="project-summary">This portfolio is itself a demonstration of the skill it showcases: a collaborative, iterative build with AI that required real expertise to shape into something worth sharing.</p>
+        <div class="project-tags">
+          <span class="project-tag">Meta</span>
+          <span class="project-tag">Iterative AI Use</span>
+          <span class="project-tag">Professional Brand</span>
+        </div>
+      </div>
+      <div class="expand-icon">+</div>
+    </div>
+    <div class="project-detail">
+      <div class="project-detail-inner">
+        <div class="project-question">
+          <h4>What is this?</h4>
+          <p>A portfolio of real, practical examples showing how I use AI professionally to amplify my productivity and the quality of my work. Not a list of tools I've tried. Not a one-prompt-and-done showcase. A curated set of projects that demonstrate how I iterate, brainstorm, and bring HR expertise to refine AI output into something I'd stake my professional reputation on. The portfolio itself is the proof of concept: I built it collaboratively with Claude, making choices along the way about structure, tone, confidentiality, and what stories best demonstrate the skill.</p>
+        </div>
+        <div class="project-question">
+          <h4>Why this approach, and where did AI fit?</h4>
+          <p>I've been using AI tools since 2022, and how I use them has changed significantly. Early on, I'd ask Claude for a job description and take the first draft with minor tweaks. The output was decent, but looking back, it was a little generic, a little formulaic. This was before most people could spot AI-generated content, so it didn't raise flags at the time. But because I follow AI practitioners and content creators closely, I started recognizing what we'd now call AI slop before most people in my field did, and I adjusted.</p>
+          <p>Over time, I've learned to treat AI as a thinking partner rather than a content machine. I prompt it to ask me questions so it can produce better output. I iterate rather than accepting first drafts. I feed in my own subject matter expertise and organizational context because I've seen firsthand how much that changes the result. And I've found ways to use it that go beyond content generation. For example, after receiving feedback from my manager that I needed to collaborate more closely with the HR team before taking recommendations to sales leadership, I updated Claude's memory with that context. Now when we're working through recommendations or drafting deliverables, Claude naturally prompts me to check in with HR before moving forward. I turned professional development feedback into a built-in workflow checkpoint.</p>
+          <p>I also invest in staying current. I follow people like Nate B. Jones, Sabrina Ramonov, and Andrej Karpathy to keep up with how the models are evolving and how practitioners are using them. This isn't a static skill. Both my knowledge and the models are continuously developing, and I plan to keep refining how I work with them.</p>
+        </div>
+        <div class="project-question">
+          <h4>What would break?</h4>
+          <p>The risks of using AI poorly in HR are serious. Legal liability if documentation isn't carefully reviewed. Engagement and turnover risks if communications feel generic or tone-deaf. Damage to my credibility if leaders or employees can tell I'm handing off work to AI without applying judgment. The whole point of this portfolio is that AI amplifies my expertise. If I used it as a shortcut instead, every one of these projects would have gone differently, and not in a good way.</p>
+        </div>
+        <div class="project-question">
+          <h4>What did I learn?</h4>
+          <p>I've learned that the real value isn't in what AI produces. It's in what I bring to the table to shape, refine, and contextualize that output. I've learned to prompt better, to get the model to interview me, to iterate instead of accepting first drafts, and to update the model with my tone, style, and expertise so the starting point keeps getting closer to where I need it. I've learned how to use AI responsibly with sensitive situations, anonymizing data while still getting the productivity benefit. And maybe most importantly, I've learned that this is a skill that keeps evolving. The person I was as an AI user in 2022 is not who I am today, and who I am today won't be who I am a year from now. Staying curious and staying current is part of the practice.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<!-- PUBLISHED WORK -->
+<section class="published" id="published">
+  <div class="about-grid">
+    <div class="about-label">Published Work</div>
+    <div class="about-content">
+      <p>I wrote about leadership, management, and people strategy for UAC Magazine's quarterly publication for several years. These articles reflect the topics I care most about: helping managers lead better, creating environments where people can do their best work, and approaching the hard stuff with empathy and directness.</p>
+      <div class="published-list">
+        <p class="pub-item">Growth-Based Mindset: How to Go from Prove to Improve</p>
+        <p class="pub-item">The Great Retention: How to Keep Your Employees in Times of Great Change</p>
+        <p class="pub-item">Multiple Competing Priorities: Managing Tasks When Everything Feels Like a Priority</p>
+        <p class="pub-item">Compassionate Leadership: Helping Your Team Through Times of Change</p>
+        <p class="pub-item">Where's My Emoji? Intergenerational Communication in the Workplace</p>
+        <p class="pub-item">Don't Just Check the Box: How to Keep Performance Goals in Mind All Year Long</p>
+        <p class="pub-item">Interviewing for Success</p>
+        <p class="pub-item">Professional Juggling: How to Handle Multiple Competing Priorities Under Pressure</p>
+        <p class="pub-item">A Hard Look at the Value of Soft Skills</p>
+        <p class="pub-item">Out with the Old, In with the New: 7 Strategies to Implement Now</p>
+        <p class="pub-item">Managing Through the Stress: How to Motivate and Empower Your Team</p>
+        <p class="pub-item">Management Nightmares: How to Manage the Unmanageable</p>
+        <p class="pub-item">Generation WHY: Who Is Generation Y and How Do We Motivate Them?</p>
+        <p class="pub-item">Managing Workplace Conflict</p>
+        <p class="pub-item">Money Doesn't Grow on Trees: How to Motivate Employees Without Money</p>
+        <p class="pub-item">Seasonal Staffing Success</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <div class="philosophy-label">My Approach</div>
+    <div class="philosophy-content">
+      <h2>AI is a tool. Knowing your craft is the job.</h2>
+      <p>I think about it this way: AI can draft a communication plan in minutes. But it can't sit across from a manager who's nervous about a hard conversation and help them find the right words. It can synthesize months of performance data into a timeline, but it doesn't know that the employee's team just went through a reorg and the context matters. That part takes experience, and it takes showing up for people.</p>
+      <p>When HR is done well, people are able to do their best work. That's what I care about. AI helps me get there faster by handling production and synthesis so I can spend more of my time on the human side, which is where the real impact happens.</p>
+      <p>I also think it's important to share what I'm learning. Too many HR practitioners are either avoiding AI entirely or using it without thinking critically about the output. There's a better path, and it starts with understanding what these tools are good at and where you still need a person who knows the work.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-grid">
+    <div class="about-label">Connect</div>
+    <div class="contact-content">
+      <a href="mailto:erinannsaunders@gmail.com">erinannsaunders@gmail.com</a><br>
+      <a href="tel:3039310923">(303) 931-0923</a>
+      <p class="contact-note">Atlanta Metro, GA. Open to hybrid or fully remote roles.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Erin Saunders. Built collaboratively with Claude.
+</footer>
+
+<script>
+function toggleProject(card) {
+  const detail = card.querySelector('.project-detail');
+  const isOpen = card.classList.contains('open');
+  
+  // Close all cards first
+  document.querySelectorAll('.project-card').forEach(c => {
+    c.classList.remove('open');
+    c.querySelector('.project-detail').style.maxHeight = '0';
+  });
+  
+  // Open clicked card if it was closed
+  if (!isOpen) {
+    card.classList.add('open');
+    detail.style.maxHeight = detail.scrollHeight + 'px';
+  }
+}
+</script>
+
+</body>
+</html>
